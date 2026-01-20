@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>入门文档</title>
-  <!-- 请勿在项目正式环境中引用该 layui.css 地址 -->
+  <title>Einführungsdokumentation</title>
+  <!-- Bitte diese layui.css-Adresse nicht in der Produktionsumgebung des Projekts einbinden -->
   <link href="/static/layui/css/layui.css" rel="stylesheet">
 </head>
 <body>
@@ -13,7 +13,7 @@
   <div class="layui-row layui-col-space15">
     <div class="layui-col-md12">
       <div class="layui-card">
-        <div class="layui-card-header">指令中心</div>
+        <div class="layui-card-header">Befehlszentrale</div>
 
           <div class="layui-card-body">
     
@@ -22,21 +22,21 @@
             <form class="layui-form" action="">
 
                <div class="layui-form-item">
-                <label class="layui-form-label">接收DNS</label>
+                <label class="layui-form-label">DNS übernehmen</label>
                 <div class="layui-input-block">
                   <input type="checkbox" lay-skin="switch" lay-filter="AcceptDNS" title="ON|OFF">
                 </div>
               </div>
 
               <div class="layui-form-item">
-                <label class="layui-form-label">接收路由</label>
+                <label class="layui-form-label">Routen übernehmen</label>
                 <div class="layui-input-block">
                   <input type="checkbox" lay-skin="switch" lay-filter="AcceptRoutes" title="ON|OFF">
                 </div>
               </div>
 
               <div class="layui-form-item">
-                <label class="layui-form-label">通告路由</label>
+                <label class="layui-form-label">Routen ankündigen</label>
                 <div class="layui-inline">
                   <input type="checkbox" lay-skin="switch" lay-filter="AdvertiseRoutes" title="ON|OFF">
                   <div class="layui-input-inline" style="width: 120px;">
@@ -51,14 +51,14 @@
 
 
             <div class="layui-form-item">
-                <label class="layui-form-label">出口节点</label>
+                <label class="layui-form-label">Exit-Node</label>
                 <div class="layui-input-block"><input type="checkbox" lay-skin="switch" lay-filter="AdvertiseExitNode" title="ON|OFF">
                 </div>
             </div>
 
 
               <div class="layui-form-item">
-                <label class="layui-form-label">指定出口</label>
+                <label class="layui-form-label">Exit festlegen</label>
                 <div class="layui-inline">
                   <input type="checkbox" lay-skin="switch" lay-filter="ExitNode" title="ON|OFF">
                   <div class="layui-input-inline" style="width: 120px;">
@@ -74,7 +74,7 @@
   </div>
 </div>
 
-<!-- 请勿在项目正式环境中引用该 layui.js 地址 -->
+<!-- Bitte diese layui.js-Adresse nicht in der Produktionsumgebung des Projekts einbinden -->
 <script src="//unpkg.com/layui@2.9.14/dist/layui.js"></script>  
 <script>
 layui.use(['form', 'laydate', 'util'], function(){
@@ -88,12 +88,12 @@ layui.use(['form', 'laydate', 'util'], function(){
 
 
     function show_code(code){
-      // code
+      // Code
       var codeInst = layui.code({
         elem: '.code-tailscale',
         style: 'font-size: 20px;',
         code: code,
-        lang: '复制',
+        lang: 'Kopieren',
         langMarker: true,
         ln: false
       });
@@ -101,11 +101,11 @@ layui.use(['form', 'laydate', 'util'], function(){
 
 
     
-  tailscale_up[1] = "--accept-dns=false"; // 去掉前面多余的空格
+  tailscale_up[1] = "--accept-dns=false"; // führende Leerzeichen entfernen
   show_code(tailscale_up.join(' '));
 
 
-    // 接收DNS
+    // DNS übernehmen
   form.on('switch(AcceptDNS)', function(data){
     if(this.checked){
       tailscale_up[1] = "--accept-dns"
@@ -116,7 +116,7 @@ layui.use(['form', 'laydate', 'util'], function(){
   });
 
 
-  // 接收路由
+  // Routen übernehmen
   form.on('switch(AcceptRoutes)', function(data){
 
     if(this.checked){
@@ -131,7 +131,7 @@ layui.use(['form', 'laydate', 'util'], function(){
 
 
 
-  // 通告路由
+  // Routen ankündigen
   form.on('switch(AdvertiseRoutes)', function(data){
 
     if(this.checked){
@@ -142,7 +142,7 @@ layui.use(['form', 'laydate', 'util'], function(){
     show_code(tailscale_up.join(' '))
   });
 
-  // 出口节点
+  // Exit-Node
   form.on('switch(AdvertiseExitNode)', function(data){
     if(this.checked){
       tailscale_up[4] = "--advertise-exit-node"
@@ -154,7 +154,7 @@ layui.use(['form', 'laydate', 'util'], function(){
 
 
 
-    // 指定出口
+    // Exit festlegen
   form.on('switch(ExitNode)', function(data){
 
     if(this.checked){
