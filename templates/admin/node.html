@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>节点中心</title>
+  <title>Knoten-Zentrum</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,38 +15,38 @@
     <div class="layui-row layui-col-space15">
       <div class="layui-col-md12">
         <div class="layui-card">
-          <div class="layui-card-header">节点中心</div>
+          <div class="layui-card-header">Knoten-Zentrum</div>
           <div class="layui-card-body">
             
             {% if current_user.role == 'manager' %}
-                    <!-- 搜索框：嵌套在layui-form中，添加margin-bottom避免与表格重叠 -->
+                    <!-- Suchfeld: In layui-form eingebettet; margin-bottom verhindert Überlappung mit der Tabelle -->
             <div class="layui-form" lay-filter="searchForm" style="margin-bottom: 5px;">
               <div class="layui-input-inline" style="width: 300px;">
   
-                <input type="text" name="search_name" placeholder="请输入用户名搜索" class="layui-input" lay-affix="clear">
+                <input type="text" name="search_name" placeholder="Bitte Benutzername eingeben, um zu suchen" class="layui-input" lay-affix="clear">
               </div>
               <button class="layui-btn layui-btn-sm" lay-submit lay-filter="demo-table-search">
-                <i class="layui-icon layui-icon-search"></i> 搜索
+                <i class="layui-icon layui-icon-search"></i> Suchen
               </button>
             </div>
             {% endif %}
             
 
-            <!-- 表格：保留原有的所有配置 -->
+            <!-- Tabelle: Alle ursprünglichen Einstellungen beibehalten -->
             <table class="layui-table" id="test-table-index" lay-filter="test-table-index"></table>
 
-            <!-- 工具栏模板 -->
+            <!-- Toolbar-Template -->
             <script type="text/html" id="toolbarDemo">
               <div class="layui-btn-container">
                 <button id="switchButton" class="layui-btn layui-btn-sm" lay-event=""></button>
-                <button class="layui-btn layui-btn-sm" lay-event="reload">刷新</button>
-                <button class="layui-btn layui-btn-sm layui-btn-primary" lay-event="multi-row">多行</button>
-                <button class="layui-btn layui-btn-sm layui-btn-primary" lay-event="default-row">单行</button>
+                <button class="layui-btn layui-btn-sm" lay-event="reload">Aktualisieren</button>
+                <button class="layui-btn layui-btn-sm layui-btn-primary" lay-event="multi-row">Mehrzeilig</button>
+                <button class="layui-btn layui-btn-sm layui-btn-primary" lay-event="default-row">Einzeilig</button>
      
               </div>
             </script>
 
-            <!-- 时间模板 -->
+            <!-- Zeit-Template -->
             {% raw %}
             <script type="text/html" id="TPL-lastTime">  
                 {{#  
@@ -59,10 +59,10 @@
             </script>               
             {% endraw %}
 
-            <!-- 操作列模板 -->
+            <!-- Aktionen-Spalte Template -->
             <script type="text/html" id="barDemo">
-              <a class="layui-btn layui-btn-info layui-btn-xs" lay-event="detail">查看</a>
-              <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+              <a class="layui-btn layui-btn-info layui-btn-xs" lay-event="detail">Ansehen</a>
+              <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">Löschen</a>
             </script>  
           </div>
         </div>
@@ -81,41 +81,41 @@
     var util = layui.util;
     var form = layui.form;
 
-    // 节点添加结果提示（保留原有逻辑）
+    // Hinweis nach dem Hinzufügen eines Knotens (ursprüngliche Logik beibehalten)
     var ip_address = '{{ ip_address }}';
     if (ip_address == "error"){
         layer.alert('{{ error_info }}', {
-            icon: 7, shadeClose: true, title: '节点添加失败'
+            icon: 7, shadeClose: true, title: 'Hinzufügen des Knotens fehlgeschlagen'
         }, function(){
             window.location.href = '/admin/node';
         });
     } else if(ip_address && ip_address != "error"){
-        layer.alert('ip地址: '+ ip_address, {
-            icon: 1, shadeClose: true, title: '节点添加成功'
+        layer.alert('IP-Adresse: '+ ip_address, {
+            icon: 1, shadeClose: true, title: 'Knoten erfolgreich hinzugefügt'
         }, function(){
             window.location.href = '/admin/node';
         });
     }
 
-    // 表格渲染（保留原有所有配置，仅调整height适配搜索框）
+    // Tabellen-Rendering (alle ursprünglichen Einstellungen beibehalten; nur height an Suchfeld angepasst)
     var tableIns = table.render({
       elem: '#test-table-index'
       ,url: '/api/node/getNodes'
       ,toolbar: '#toolbarDemo'
       ,defaultToolbar: ['filter', 'exports', 'print', {
-        title: '帮助', layEvent: 'LAYTABLE_TIPS', icon: 'layui-icon-tips'
+        title: 'Hilfe', layEvent: 'LAYTABLE_TIPS', icon: 'layui-icon-tips'
       }]
       ,height: {% if current_user.role == 'user' %}'full-100'{% else %}'full-150'{% endif %}
       ,cellMinWidth: 80
       ,totalRow: true
       ,page: false
-      ,where: {} // 存储搜索条件
+      ,where: {} // Speichert Suchbedingungen
       ,cols: [[
-            {field:'id', fixed: 'left', width:80, title: 'ID', sort: true, totalRowText: '合计：'}
+            {field:'id', fixed: 'left', width:80, title: 'ID', sort: true, totalRowText: 'Summe:'}
             {% if current_user.role == 'manager' %}
-                ,{field:'userName', width:180, title: '用户名', sort: true, edit: 'text',totalRow: '  {% raw %}{{= d.TOTAL_ROW.count   }}{% endraw %} 😊'}
+                ,{field:'userName', width:180, title: 'Benutzername', sort: true, edit: 'text',totalRow: '  {% raw %}{{= d.TOTAL_ROW.count   }}{% endraw %} 😊'}
             {% endif %}
-            ,{field:'name', width:180, title: '节点名', edit: 'text'
+            ,{field:'name', width:180, title: 'Knotenname', edit: 'text'
                 {% if current_user.role == 'user' %}
                     ,totalRow: ' {% raw %}{{= d.TOTAL_ROW.count   }}{% endraw %} 😊'
                 {% endif %}
@@ -123,7 +123,7 @@
             ,{
                 field: 'ip', 
                 width: 160, 
-                title: 'IP地址',
+                title: 'IP-Adresse',
                 templet: function(d) {
                     return d.ip.split(', ').join('<br>');
                 }
@@ -131,52 +131,52 @@
             ,{
                 field: 'online', 
                 width: 100, 
-                title: '状态',
+                title: 'Status',
                 sort: true, 
                 templet: function(d) {
-                    return d.online ? '<span class="layui-badge layui-bg-green">在线</span>' : '<span class="layui-badge layui-bg-gray">离线</span>';
+                    return d.online ? '<span class="layui-badge layui-bg-green">Online</span>' : '<span class="layui-badge layui-bg-gray">Offline</span>';
                 }
             }
             ,{
                 field: 'createTime', 
-                title: '创建时间', 
+                title: 'Erstellt am', 
                 width: 180, 
                 sort: true,
                 templet: function(d) {
                     return util.timeAgo(d.createTime);
                 }
             }
-            ,{fixed: 'right', title:'操作', width: 120, toolbar: '#barDemo'}
+            ,{fixed: 'right', title:'Aktion', width: 120, toolbar: '#barDemo'}
         ]]
       ,error: function(res, msg){
         console.log(res, msg)
       }
     });
 
-    // 保留按钮状态逻辑
+    // Button-Status-Logik beibehalten
     function keepButtonStatus(){
         if (window.top !== window) {
-            $('#switchButton').attr('lay-event', 'addNode').text('添加节点');
+            $('#switchButton').attr('lay-event', 'addNode').text('Knoten hinzufügen');
         }else{
-            $('#switchButton').attr('lay-event', 'goHome').text('返回主页');
+            $('#switchButton').attr('lay-event', 'goHome').text('Zurück zur Startseite');
         }
     }
     keepButtonStatus();
 
-    // 搜索表单提交事件
+    // Suchformular Submit-Event
     form.on('submit(demo-table-search)', function(data){
       var field = data.field;
-      // 重载表格，传递搜索条件
+      // Tabelle neu laden, Suchbedingungen übergeben
       table.reload('test-table-index', {
-        where: field, // 搜索条件：{username: "输入的用户名"}
-        page: false // 重置页码
+        where: field, // Suchbedingungen: {search_name: "eingegebener Benutzername"}
+        page: false
       });
       keepButtonStatus();
 
-      return false; // 阻止表单默认提交
+      return false; // Standard-Submit verhindern
     });
 
-    // 单元格编辑事件（保留原有逻辑）
+    // Zellenbearbeitung (ursprüngliche Logik beibehalten)
     table.on('edit(test-table-index)', function(obj){
       var value = obj.value, data = obj.data, field = obj.field;
       if (field == "name"){
@@ -211,7 +211,7 @@
       }
     });
 
-    // 工具栏事件（保留原有逻辑）
+    // Toolbar-Events (ursprüngliche Logik beibehalten)
     table.on('toolbar(test-table-index)', function(obj){
       var checkStatus = table.checkStatus(obj.config.id);
       switch(obj.event){
@@ -219,7 +219,7 @@
           window.location.href = '/admin';
           break;
         case 'addNode':
-          layer.prompt({title: '请输入节点id'}, function(value, index){
+          layer.prompt({title: 'Bitte Knoten-ID eingeben'}, function(value, index){
             if(value === '') return elem.focus();
             $.ajax({
               url:'/api/node/register',
@@ -239,19 +239,19 @@
           });
           break;
         case 'reload':
-          // 刷新时保留搜索条件
+          // Beim Aktualisieren Suchbedingungen beibehalten
           table.reload('test-table-index', {
             where: tableIns.config.where
           });
-          layer.msg('已刷新', {icon: 1});
+          layer.msg('Aktualisiert', {icon: 1});
           break;
         case 'multi-row':
           table.reload('test-table-index', {lineStyle: 'height: 95px;'});
-          layer.msg('已设为多行显示');
+          layer.msg('Mehrzeilige Anzeige aktiviert');
           break;
         case 'default-row':
           table.reload('test-table-index', {lineStyle: null});
-          layer.msg('已设为单行显示');
+          layer.msg('Einzeilige Anzeige aktiviert');
           break;
         case 'LAYTABLE_TIPS':
           layer.alert('Table for layui-v'+ layui.v);
@@ -260,11 +260,11 @@
       keepButtonStatus();
     });
 
-    // 单元格工具事件（保留原有逻辑）
+    // Zellen-Tool-Events (ursprüngliche Logik beibehalten)
     table.on('tool(test-table-index)', function(obj){
       var data = obj.data;
       if(obj.event === 'del'){
-        layer.confirm('真的删除该节点吗？', function(index){
+        layer.confirm('Möchten Sie diesen Knoten wirklich löschen?', function(index){
           $.ajax({
             url:'/api/node/delete',
             type: 'post',
@@ -284,7 +284,7 @@
       }else if(obj.event === 'detail'){
         var dialogContent = `<div id="node-detail-content" style="padding: 20px;"></div>`;
         layer.open({
-          title: '节点信息',
+          title: 'Knoteninformationen',
           type: 1,
           area: ['600px','400px'],
           content: dialogContent
@@ -299,10 +299,10 @@
               const dataList = res.data;
               const post_data = dataList.length > 0 ? dataList[0] : {};
               $('#node-detail-content').html(`
-                <p><strong>客户端:</strong> ${post_data.Client || '未知'}</p>
-                <p><strong>操作系统:</strong> ${post_data.OS || '未知'}</p>
-                <p><strong>路由列表:</strong> ${data.availableRoutes || '无'}</p>
-                <p><strong>可用路由:</strong> ${data.approvedRoutes || '无'}</p>
+                <p><strong>Client:</strong> ${post_data.Client || 'Unbekannt'}</p>
+                <p><strong>Betriebssystem:</strong> ${post_data.OS || 'Unbekannt'}</p>
+                <p><strong>Routenliste:</strong> ${data.availableRoutes || 'Keine'}</p>
+                <p><strong>Verfügbare Routen:</strong> ${data.approvedRoutes || 'Keine'}</p>
               `);
             } else {
               layer.msg(res.msg, {icon: 7});
