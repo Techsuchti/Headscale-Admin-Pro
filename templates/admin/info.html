@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>设置我的资料</title>
+  <title>Mein Profil einstellen</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,14 +15,14 @@
     <div class="layui-row layui-col-space15">
       <div class="layui-col-md12">
         <div class="layui-card">
-          <div class="layui-card-header">我的资料</div>
+          <div class="layui-card-header">Meine Daten</div>
           <div class="layui-card-body" pad15>
             
             <div class="layui-form" wid100 lay-filter="">
               
               
               <div class="layui-form-item" >
-                <label class="layui-form-label">用户名</label>
+                <label class="layui-form-label">Benutzername</label>
                 <div class="layui-input-inline" >
                   <input type="text" name="nickname"   readonly  class="layui-input" value="{{ name }}">
                 </div>
@@ -30,7 +30,7 @@
 
               
               <div class="layui-form-item">
-                <label class="layui-form-label">手机号码</label>
+                <label class="layui-form-label">Mobilnummer</label>
                 <div class="layui-input-inline">
                   <input type="text" name="cellphone" autocomplete="off" readonly class="layui-input" value="{{ cellphone }}">
                 </div>
@@ -38,22 +38,22 @@
 
 
               <div class="layui-form-item">
-                <label class="layui-form-label">邮箱</label>
+                <label class="layui-form-label">E-Mail</label>
                 <div class="layui-input-inline">
-                  <input type="text" name="email"lay-verify=""  readonly autocomplete="off" class="layui-input" value="{{ email }}">
+                  <input type="text" name="email" lay-verify="" readonly autocomplete="off" class="layui-input" value="{{ email }}">
                 </div>
               </div>
 
 
               <div class="layui-form-item">
-                <label class="layui-form-label">节点数量支持</label>
+                <label class="layui-form-label">Unterstützte Anzahl an Knoten</label>
                 <div class="layui-input-inline">
                   <input type="text" name="email" lay-verify="" autocomplete="off" class="layui-input"  value="{{ node }}" readonly>
                 </div>
               </div>
 
               <div class="layui-form-item">
-                <label class="layui-form-label">路由权限</label>
+                <label class="layui-form-label">Routen-Berechtigung</label>
                 <div class="layui-input-inline" style="width: 80px">
                   <input type="checkbox" name="open" lay-skin="switch" lay-filter="switchTest" title="ON|OFF"  {{ route }}>
                 </div>
@@ -62,7 +62,7 @@
 
 
               <div class="layui-form-item">
-                <label class="layui-form-label">到期时间</label>
+                <label class="layui-form-label">Ablaufdatum</label>
                 <div class="layui-input-inline">
                   <input type="text" name="expire"  lay-verify="" autocomplete="off" class="layui-input" readonly  value="{{ expire }}">
                 </div>
@@ -76,7 +76,7 @@
               
 {#              <div class="layui-form-item">#}
 {#                <div class="layui-input-block">#}
-{#                  <button class="layui-btn" lay-submit lay-filter="setmyinfo">确认修改</button>#}
+{#                  <button class="layui-btn" lay-submit lay-filter="setmyinfo">Änderungen bestätigen</button>#}
 {#                </div>#}
 {#              </div>#}
             </div>
