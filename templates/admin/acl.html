@@ -1,9 +1,9 @@
-  {% raw %}
+{% raw %}
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
-  <title>layui table 组件综合演示</title>
+  <title>Umfassende Demo der layui-Table-Komponente</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,15 +18,15 @@
     <div class="layui-row layui-col-space15">
       <div class="layui-col-md12">
         <div class="layui-card">
-          <div class="layui-card-header">访问控制中心</div>
+          <div class="layui-card-header">Zugriffskontrollzentrum</div>
           <div class="layui-card-body">
             <table class="layui-hide" id="test-table-index" lay-filter="test-table-index"></table>
 
             <script type="text/html" id="toolbarDemo">
               <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-sm" lay-event="writeConfig">写入配置</button>
-                <button class="layui-btn layui-btn-sm" lay-event="readConfig">读取配置</button>
-                <button class="layui-btn layui-btn-sm" lay-event="reload">重载配置</button>
+                <button class="layui-btn layui-btn-sm" lay-event="writeConfig">Konfiguration schreiben</button>
+                <button class="layui-btn layui-btn-sm" lay-event="readConfig">Konfiguration lesen</button>
+                <button class="layui-btn layui-btn-sm" lay-event="reload">Konfiguration neu laden</button>
               </div>
             </script>
                 
@@ -41,7 +41,7 @@
   <script>
 
   layui.config({
-    base: '/static/' // 静态资源所在路径
+    base: '/static/' // Pfad, in dem sich die statischen Ressourcen befinden
   }).use(['index', 'table', 'dropdown','form'], function(){
     var table = layui.table
     ,form = layui.form
@@ -53,24 +53,24 @@
 
 
     
-    // 创建渲染实例
+    // Render-Instanz erstellen
     table.render({
       elem: '#test-table-index'
-      ,url: '/api/acl/getACL' // 此处为静态模拟数据，实际使用时需换成真实接口
+      ,url: '/api/acl/getACL' // Hier: statisch simulierte Daten; in der Praxis durch echte API ersetzen
       ,toolbar: '#toolbarDemo'
       ,defaultToolbar: ['filter', 'exports', 'print', {
-        title: '帮助'
+        title: 'Hilfe'
         ,layEvent: 'LAYTABLE_TIPS'
         ,icon: 'layui-icon-tips'
       }]
-      ,height: 'full-100' // 最大高度减去其他容器已占有的高度差
+      ,height: 'full-100' // Maximale Höhe minus der Höhe anderer Container
       ,cellMinWidth: 80
-      ,totalRow: true // 开启合计行
+      ,totalRow: true // Summenzeile aktivieren
       ,page: true
       ,cols: [[
         //{type: 'checkbox'}
-        {field:'id', title:'ID', fixed: 'left', width:50,  totalRowText: '合计：'}
-        ,{field:'userName', title:'用户名',width:180,totalRow: '{{= d.TOTAL_ROW.count   }} 😊'}
+        {field:'id', title:'ID', fixed: 'left', width:50,  totalRowText: 'Summe:'}
+        ,{field:'userName', title:'Benutzername',width:180,totalRow: '{{= d.TOTAL_ROW.count   }} 😊'}
         ,{field:'acl', title:'ACL',width:800,edit: 'text'}
     
       ]]
@@ -81,7 +81,7 @@
 
     
 
-    // 工具栏事件
+    // Toolbar-Events
     table.on('toolbar(test-table-index)', function(obj){
       var $ = layui.$;
       var util = layui.util;
@@ -111,15 +111,15 @@
             dataType: 'json',
             success:function(res){
               if(res.code == 0){
-                // 在此处输入 layer 的任意代码
+                // Hier beliebigen layer-Code einfügen
                 layer.open({
-                  type: 1, // page 层类型
+                  type: 1, // Seitentyp (page layer)
                   area: ['1000px', '500px'],
                   title: 'ACL',
-                  shade: 0.6, // 遮罩透明度
-                  shadeClose: true, // 点击遮罩区域，关闭弹层
-                  maxmin: true, // 允许全屏最小化
-                  anim: 0, // 0-6 的动画形式，-1 不开启
+                  shade: 0.6, // Transparenz des Overlays
+                  shadeClose: true, // Klick auf Overlay schließt das Popup
+                  maxmin: true, // Vollbild/Minimieren erlauben
+                  anim: 0, // Animation 0-6, -1 deaktiviert
                   content: (res.data)
                 });
               }else{
@@ -148,10 +148,10 @@
     });
 
 
-    //事件-单元格编辑
+    // Event: Zellenbearbeitung
     table.on('edit(test-table-index)', function(obj){
-      var value = obj.value; //得到修改后的值
-      var field = obj.field; //得到字段
+      var value = obj.value; // geänderter Wert
+      var field = obj.field; // Feldname
       var oldValue= obj.oldValue;
 
 
@@ -182,5 +182,4 @@
   </script>
 </body>
 </html>
-
-    {% endraw %}
+{% endraw %}
