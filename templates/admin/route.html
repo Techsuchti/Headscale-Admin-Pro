@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>layui table 组件综合演示</title>
+  <title>Umfassende Demo der layui-Table-Komponente</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,25 +17,25 @@
     <div class="layui-row layui-col-space15">
       <div class="layui-col-md12">
         <div class="layui-card">
-          <div class="layui-card-header">路由中心</div>
+          <div class="layui-card-header">Routen-Zentrum</div>
           <div class="layui-card-body">
             <table class="layui-hide" id="test-table-index" lay-filter="test-table-index"></table>
 
             <script type="text/html" id="toolbarDemo">
               <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-sm" lay-event="reload">刷新</button>
-                <button class="layui-btn layui-btn-sm" lay-event="add">路由通告</button>
+                <button class="layui-btn layui-btn-sm" lay-event="reload">Aktualisieren</button>
+                <button class="layui-btn layui-btn-sm" lay-event="add">Routen ankündigen</button>
               </div>
             </script>
              
 
             {% raw %}
             <script type="text/html" id="test-table-switchTpl">
-              <!-- 这里的 checked 的状态只是演示 -->
-              <input type="checkbox" name="启用" lay-skin="switch" lay-text="是|否" lay-filter="test-table-sexDemo"
+              <!-- Der checked-Status hier dient nur zur Demonstration -->
+              <input type="checkbox" name="Aktivieren" lay-skin="switch" lay-text="Ja|Nein" lay-filter="test-table-sexDemo"
                value="{{ d.enable }}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}" {{ d.enable == "1" ? 'checked' : '' }}>
                &nbsp;
-               <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+               <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">Löschen</a>
             </script>
             {% endraw %}
              
@@ -49,40 +49,40 @@
   <script src="/static/layui/layui.js"></script>
   <script>
   layui.config({
-    base: '/static/' // 静态资源所在路径
+    base: '/static/' // Pfad, in dem sich die statischen Ressourcen befinden
   }).use(['index', 'table', 'dropdown','form'], function(){
     var table = layui.table
     ,form = layui.form
     ,$ = layui.$;
     var dropdown = layui.dropdown;
     
-    // 创建渲染实例
+    // Render-Instanz erstellen
     table.render({
       elem: '#test-table-index'
-      ,url: '/api/route/getRoute' // 此处为静态模拟数据，实际使用时需换成真实接口
+      ,url: '/api/route/getRoute' // Hier: statisch simulierte Daten; in der Praxis durch echte API ersetzen
       ,toolbar: '#toolbarDemo'
       ,defaultToolbar: ['filter', 'exports', 'print', {
-        title: '帮助'
+        title: 'Hilfe'
         ,layEvent: 'LAYTABLE_TIPS'
         ,icon: 'layui-icon-tips'
       }]
-      ,height: 'full-100' // 最大高度减去其他容器已占有的高度差
+      ,height: 'full-100' // Maximale Höhe minus der Höhe anderer Container
       ,cellMinWidth: 80
-      ,totalRow: true // 开启合计行
+      ,totalRow: true // Summenzeile aktivieren
       ,page: true
       ,cols: [[
             //{type: 'checkbox'}
-            {field:'id', title:'ID', fixed: 'left', width:80, unresize: true, sort: true, totalRowText: '合计：'}
+            {field:'id', title:'ID', fixed: 'left', width:80, unresize: true, sort: true, totalRowText: 'Summe:'}
             {% if current_user.role == 'manager' %}
-                ,{field:'name', title:'用户名',width:200, totalRow: '  {% raw %}{{= d.TOTAL_ROW.count   }}{% endraw %} 😊'}
+                ,{field:'name', title:'Benutzername',width:200, totalRow: '  {% raw %}{{= d.TOTAL_ROW.count   }}{% endraw %} 😊'}
             {% endif %}
-            ,{field:'NodeName', title:'节点',width:300
+            ,{field:'NodeName', title:'Knoten',width:300
                 {% if current_user.role == 'user' %}
                     ,totalRow: ' {% raw %}{{= d.TOTAL_ROW.count   }}{% endraw %} 😊'
                 {% endif %}
             }
-            ,{field:'route', title:'路由',width:280}
-            ,{field:'createTime', title: '创建时间', width:200, sort: true}
+            ,{field:'route', title:'Route',width:280}
+            ,{field:'createTime', title: 'Erstellzeit', width:200, sort: true}
         
         ]]
       ,error: function(res, msg){
@@ -92,10 +92,10 @@
 
 
    
-// 工具栏事件
+// Toolbar-Events
 table.on('toolbar(test-table-index)', function(obj){
   var $ = layui.$;
-  var form = layui.form; // 确保引入form模块
+  var form = layui.form; // Sicherstellen, dass das form-Modul eingebunden ist
   var util = layui.util;
   var id = obj.config.id;
   var checkStatus = table.checkStatus(id);
@@ -112,136 +112,136 @@ table.on('toolbar(test-table-index)', function(obj){
         <div class="layui-form" lay-filter="filter-test-layer" style="margin: 20px 35px 30px 0; padding: 10px 0;">
       <div class="demo-login-container">
         {% if current_user.role == 'manager' %}
-        <!-- 用户选择下拉框 - 仅管理员显示 -->
+        <!-- Benutzer-Auswahl Dropdown - nur für Admins sichtbar -->
         <div class="layui-form-item">
-          <label class="layui-form-label">用户选择</label>
+          <label class="layui-form-label">Benutzer auswählen</label>
           <div class="layui-input-block">
-            <select name="userId" lay-verify="required" lay-reqtext="请选择用户" lay-filter="userIdFilter">
-              <option value="">加载中...</option>
+            <select name="userId" lay-verify="required" lay-reqtext="Bitte Benutzer auswählen" lay-filter="userIdFilter">
+              <option value="">Wird geladen...</option>
             </select>
           </div>
         </div>
         {% endif %}
         
-        <!-- 节点选择下拉框 -->
+        <!-- Knoten-Auswahl Dropdown -->
         <div class="layui-form-item">
-          <label class="layui-form-label">节点选择</label>
+          <label class="layui-form-label">Knoten auswählen</label>
           <div class="layui-input-block">
-            <select name="nodeId" lay-verify="required" lay-reqtext="请选择节点" lay-filter="nodeIdFilter">
-              <option value="">加载中...</option>
+            <select name="nodeId" lay-verify="required" lay-reqtext="Bitte Knoten auswählen" lay-filter="nodeIdFilter">
+              <option value="">Wird geladen...</option>
             </select>
           </div>
         </div>
         
-        <!-- 路由选择下拉框 -->
+        <!-- Routen-Auswahl Dropdown -->
         <div class="layui-form-item">
-          <label class="layui-form-label">路由选择</label>
+          <label class="layui-form-label">Route auswählen</label>
           <div class="layui-input-block">
-            <select name="routes" lay-verify="required" lay-reqtext="请选择路由">
-              <option value="">请先选择节点</option>
+            <select name="routes" lay-verify="required" lay-reqtext="Bitte Route auswählen">
+              <option value="">Bitte zuerst Knoten auswählen</option>
             </select>
           </div>
         </div>
       
         <div class="layui-form-item">
           <div class="layui-input-block">
-            <button class="layui-btn" lay-submit lay-filter="demo-login">提交</button>
+            <button class="layui-btn" lay-submit lay-filter="demo-login">Absenden</button>
           </div>
         </div>
       </div>
     </div>
       `,
   
-      // 根据角色调整弹窗高度（管理员多一个用户选择框，高度增加50px）
+      // Popup-Höhe je nach Rolle anpassen (Admins haben zusätzlich die Benutzer-Auswahl, daher +50px)
       area: ['320px', {% if current_user.role == 'manager' %}'295px'{% else %}'245px'{% endif %}],
       maxmin: true,
       success: function(layero, index){
-        layer.full(index); // 最大化
+        layer.full(index); // Maximieren
         
-        // 存储用户列表数据（仅管理员需要）
+        // Benutzerliste speichern (nur für Admins nötig)
         var userList = [];
-        // 当前用户信息（普通用户直接使用）
+        // Aktueller Benutzer (für normale Benutzer)
         var currentUser = {
           id: '{{ current_user.id }}',
           username: '{{ current_user.username }}'
         };
         
-        // 仅管理员加载用户列表
+        // Nur Admin: Benutzerliste laden
         {% if current_user.role == 'manager' %}
         $.ajax({
-          url: '/api/user/getUsers', // 用户列表接口
+          url: '/api/user/getUsers', // API für Benutzerliste
           type: 'get',
           dataType: 'json',
           success: function(res) {
             if (res.code === "0" && res.data && res.data.length > 0) {
               userList = res.data;
               var userIdSelect = layero.find('select[name="userId"]');
-              userIdSelect.html('<option value="">请选择用户</option>');
+              userIdSelect.html('<option value="">Bitte Benutzer auswählen</option>');
               res.data.forEach(function(user) {
                 userIdSelect.append(`<option value="${user.id}">${user.userName}</option>`);
               });
             } else {
-              layero.find('select[name="userId"]').html(`<option value="">${res.msg || '暂无用户数据'}</option>`);
+              layero.find('select[name="userId"]').html(`<option value="">${res.msg || 'Keine Benutzerdaten vorhanden'}</option>`);
             }
             form.render('select', 'filter-test-layer');
           },
           error: function(xhr) {
-            console.error('用户请求失败：', xhr);
-            layero.find('select[name="userId"]').html('<option value="">用户数据加载失败（网络错误）</option>');
+            console.error('Benutzer-Request fehlgeschlagen:', xhr);
+            layero.find('select[name="userId"]').html('<option value="">Benutzerdaten konnten nicht geladen werden (Netzwerkfehler)</option>');
             form.render('select', 'filter-test-layer');
           }
         });
         {% endif %}
         
-        // 加载节点列表（管理员需选择用户后加载，普通用户直接加载）
+        // Knotenliste laden (Admins: nach Benutzerwahl; normale Benutzer: direkt)
         var loadNodes = function(userId, userName) {
           var nodeSelect = layero.find('select[name="nodeId"]');
           var routeSelect = layero.find('select[name="routes"]');
           
-          // 重置节点和路由选择框状态
-          nodeSelect.html('<option value="">节点加载中...</option>');
-          routeSelect.html('<option value="">请先选择节点</option>');
+          // Knoten/Routen zurücksetzen
+          nodeSelect.html('<option value="">Knoten wird geladen...</option>');
+          routeSelect.html('<option value="">Bitte zuerst Knoten auswählen</option>');
           form.render('select', 'filter-test-layer');
           
-          // 请求节点列表接口（保持原接口地址不变）
+          // Knoten anfordern (Original-API beibehalten)
           $.ajax({
             url: '/api/node/getNodes',
             type: 'get',
             data: { 
               userId: userId,
-              search_name: userName // 保持原参数传递逻辑
+              search_name: userName // Original-Parameterlogik beibehalten
             },
             dataType: 'json',
             success: function(res) {
               if (res.code === "0" && res.data && res.data.length > 0) {
-                nodeSelect.html('<option value="">请选择节点</option>');
+                nodeSelect.html('<option value="">Bitte Knoten auswählen</option>');
                 res.data.forEach(function(node) {
                   var displayText = `${node.name} (${node.ip})`;
                   nodeSelect.append(`<option value="${node.id}">${displayText}</option>`);
                 });
               } else {
-                nodeSelect.html(`<option value="">${res.msg || '该用户无可用节点'}</option>`);
+                nodeSelect.html(`<option value="">${res.msg || 'Dieser Benutzer hat keine verfügbaren Knoten'}</option>`);
               }
               form.render('select', 'filter-test-layer');
             },
             error: function(xhr) {
-              console.error('节点请求失败：', xhr);
-              nodeSelect.html('<option value="">节点数据加载失败（网络错误）</option>');
+              console.error('Knoten-Request fehlgeschlagen:', xhr);
+              nodeSelect.html('<option value="">Knotendaten konnten nicht geladen werden (Netzwerkfehler)</option>');
               form.render('select', 'filter-test-layer');
             }
           });
         };
         
-        // 管理员监听用户选择变化
+        // Admin: Benutzerwechsel überwachen
         {% if current_user.role == 'manager' %}
         form.on('select(userIdFilter)', function(data){
           var userId = data.value;
           if (!userId) {
-            layero.find('select[name="nodeId"]').html('<option value="">请先选择用户</option>');
+            layero.find('select[name="nodeId"]').html('<option value="">Bitte zuerst Benutzer auswählen</option>');
             form.render('select', 'filter-test-layer');
             return;
           }
-          // 根据用户ID查找用户名
+          // Benutzername anhand userId finden
           var userName = '';
           for (var i = 0; i < userList.length; i++) {
             if (userList[i].id == userId) {
@@ -249,26 +249,25 @@ table.on('toolbar(test-table-index)', function(obj){
               break;
             }
           }
-          // 加载该用户的节点
           loadNodes(userId, userName);
         });
         {% else %}
-        // 普通用户直接加载自己的节点
+        // Normaler Benutzer: eigene Knoten direkt laden
         loadNodes(currentUser.id, currentUser.username);
         {% endif %}
         
-        // 监听节点选择变化（保持原逻辑不变）
+        // Knoten-Auswahl überwachen (Original-Logik beibehalten)
         form.on('select(nodeIdFilter)', function(data){
           var nodeId = data.value;
           var routesSelect = layero.find('select[name="routes"]');
           
           if (!nodeId) {
-            routesSelect.html('<option value="">请先选择节点</option>');
+            routesSelect.html('<option value="">Bitte zuerst Knoten auswählen</option>');
             form.render('select', 'filter-test-layer');
             return;
           }
           
-          routesSelect.html('<option value="">路由加载中...</option>');
+          routesSelect.html('<option value="">Routen werden geladen...</option>');
           form.render('select', 'filter-test-layer');
           
           $.ajax({
@@ -280,29 +279,29 @@ table.on('toolbar(test-table-index)', function(obj){
               if (routeRes.code === "0" && routeRes.data && routeRes.data.length > 0) {
                 var availableRoutes = routeRes.data[0].availableRoutes || [];
                 if (availableRoutes.length > 0) {
-                  routesSelect.html('<option value="">请选择需要通告路由</option>');
+                  routesSelect.html('<option value="">Bitte Route auswählen, die angekündigt werden soll</option>');
                   availableRoutes.forEach(function(route) {
                     routesSelect.append(`<option value="${route}">${route}</option>`);
                   });
                 } else {
-                  routesSelect.html('<option value="">该节点无可用路由</option>');
+                  routesSelect.html('<option value="">Dieser Knoten hat keine verfügbaren Routen</option>');
                 }
               } else {
-                routesSelect.html(`<option value="">${routeRes.msg || '路由数据获取失败'}</option>`);
+                routesSelect.html(`<option value="">${routeRes.msg || 'Abruf der Routendaten fehlgeschlagen'}</option>`);
               }
               form.render('select', 'filter-test-layer');
             },
             error: function(xhr) {
-              console.error('路由请求失败：', xhr);
-              routesSelect.html('<option value="">路由请求失败（网络错误）</option>');
+              console.error('Routen-Request fehlgeschlagen:', xhr);
+              routesSelect.html('<option value="">Routen konnten nicht geladen werden (Netzwerkfehler)</option>');
               form.render('select', 'filter-test-layer');
             }
           });
         });
         
-        // 监听表单提交（保持原逻辑不变）
+        // Formular-Submit überwachen (Original-Logik beibehalten)
         form.on('submit(demo-login)', function(data) {
-          // 普通用户补充userId参数
+          // Normaler Benutzer: userId ergänzen
           {% if current_user.role != 'manager' %}
           data.field.userId = currentUser.id;
           {% endif %}
@@ -317,7 +316,7 @@ table.on('toolbar(test-table-index)', function(obj){
                 layer.close(index);
                 table.reload('test-table-index');
               } else {
-                layer.msg(res.msg || '操作失败', {icon: 7});
+                layer.msg(res.msg || 'Vorgang fehlgeschlagen', {icon: 7});
               }
             }
           });
