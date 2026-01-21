@@ -1,10 +1,9 @@
-  {% raw %}
-
+{% raw %}
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
-  <title>用户中心</title>
+  <title>Benutzerzentrum</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,20 +17,20 @@
     <div class="layui-row layui-col-space15">
       <div class="layui-col-md12">
         <div class="layui-card">
-          <div class="layui-card-header">用户中心</div>
+          <div class="layui-card-header">Benutzerzentrum</div>
           <div class="layui-card-body">
             <table class="layui-hide" id="test-table-index" lay-filter="test-table-index"></table>
 
             <script type="text/html" id="toolbarDemo">
               <div class="layui-btn-container">
-                <!-- <button class="layui-btn layui-btn-sm" lay-event="addNode">添加设备</button> -->
-                <button class="layui-btn layui-btn-sm" lay-event="reload">刷新</button>
+                <!-- <button class="layui-btn layui-btn-sm" lay-event="addNode">Gerät hinzufügen</button> -->
+                <button class="layui-btn layui-btn-sm" lay-event="reload">Aktualisieren</button>
                 
                 <button class="layui-btn layui-btn-sm layui-btn-primary" lay-event="multi-row">
-                  多行
+                  Mehrzeilig
                 </button>
                 <button class="layui-btn layui-btn-sm layui-btn-primary" lay-event="default-row">
-                  单行
+                  Einzeilig
                 </button>
 
               </div>
@@ -42,19 +41,19 @@
 
 
              <script type="text/html" id="route-table-toolbar">
-              <!-- 这里的 checked 的状态只是演示 -->
-              <input type="checkbox" name="lock" title="允许" lay-filter="route-table-toolbar"
+              <!-- Der checked-Status hier dient nur zur Demonstration -->
+              <input type="checkbox" name="lock" title="Erlauben" lay-filter="route-table-toolbar"
                value="{{d.route}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}"  {{ d.route == "1" ? 'checked' : '' }}>
             </script>
 
              <script type="text/html" id="enable-table-toolbar">
-                <input type="checkbox" name="启用" lay-skin="switch" lay-text="是|否" lay-filter="enable-table-toolbar"
+                <input type="checkbox" name="Aktivieren" lay-skin="switch" lay-text="Ja|Nein" lay-filter="enable-table-toolbar"
                        value="{{ d.enable }}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}" {{ d.enable == "1" ? 'checked' : '' }}>
             </script>
 
             <script type="text/html" id="more-table-toolbar">
-                 <a class="layui-btn layui-btn-info layui-btn-xs" lay-event="detail">查看</a>
-                 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                 <a class="layui-btn layui-btn-info layui-btn-xs" lay-event="detail">Ansehen</a>
+                 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">Löschen</a>
             </script>
 
 
@@ -72,14 +71,14 @@
                   },
                   clock: function(obj, inst){
                     if (obj.d <=30){
-                      result = [obj.d,'天',obj.h,'时',obj.m,'分',obj.s,'秒'].join(' ');
+                      result = [obj.d,'Tage',obj.h,'Std.',obj.m,'Min.',obj.s,'Sek.'].join(' ');
                     }else{
                       result = d.expire
                     }
                     util.countdown.timer = inst.timer;
                   },
                   done: function(obj, inst){
-                    result = "已到期";
+                    result = "Abgelaufen";
                   }
                 });
               }}
@@ -96,7 +95,7 @@
   <script src="/static/layui/layui.js"></script>
   <script>
   layui.config({
-    base: '/static/' // 静态资源所在路径
+    base: '/static/' // Pfad, in dem sich die statischen Ressourcen befinden
   }).use(['index', 'table', 'dropdown'], function(){
     var table = layui.table;
     var form = layui.form;
@@ -107,44 +106,44 @@
 
 
     
-    // 创建渲染实例
+    // Render-Instanz erstellen
     table.render({
       elem: '#test-table-index'
-      ,url: '/api/user/getUsers' // 此处为静态模拟数据，实际使用时需换成真实接口
+      ,url: '/api/user/getUsers' // Hier: statisch simulierte Daten; in der Praxis durch echte API ersetzen
       ,toolbar: '#toolbarDemo'
       ,defaultToolbar: ['filter', 'exports', 'print', {
-        title: '帮助'
+        title: 'Hilfe'
         ,layEvent: 'LAYTABLE_TIPS'
         ,icon: 'layui-icon-tips'
       }]
-      ,height: 'full-100' // 最大高度减去其他容器已占有的高度差
+      ,height: 'full-100' // Maximale Höhe minus der Höhe anderer Container
       ,cellMinWidth: 80
-      ,totalRow: true // 开启合计行
+      ,totalRow: true // Summenzeile aktivieren
       ,page: true
       ,cols: [[
         //{type: 'checkbox', fixed: 'left'}
-        {field:'id', fixed: 'left', width:80, title: 'ID', sort: true, totalRowText: '合计：'}
-        ,{field:'userName', width:150, title: '用户名', sort: true, totalRow: '{{= d.TOTAL_ROW.count   }} 😊'}
-        // ,{field:'createTime', title:'注册时间', width: 180,templet: function(d){
+        {field:'id', fixed: 'left', width:80, title: 'ID', sort: true, totalRowText: 'Summe:'}
+        ,{field:'userName', width:150, title: 'Benutzername', sort: true, totalRow: '{{= d.TOTAL_ROW.count   }} 😊'}
+        // ,{field:'createTime', title:'Registrierungszeit', width: 180,templet: function(d){
         //     var ago = util.timeAgo(d.createTime);
         //     return ago;
         //   }
         // }
 
-        ,{field:'role', title:'角色', width: 120,templet: function(d){
+        ,{field:'role', title:'Rolle', width: 120,templet: function(d){
             if (d.role == "manager"){
-              return "超级管理员"
+              return "Super-Administrator"
             }else{
-              return "普通用户"
+              return "Normaler Benutzer"
             }
            
           }
         }
-        ,{field:'expire', title:'到期时间', sort: true,width:200,edit: 'text',templet: '#TPL-expire'}
-        ,{field:'node', title:'节点限制', width: 100,edit: 'text'}
-        ,{field: 'route', title:'路由', width: 100, minWidth: 100, toolbar: '#route-table-toolbar'}
-        ,{field: 'enable', title:'是否启用', width: 100, minWidth: 100, toolbar: '#enable-table-toolbar'}
-        ,{field: 'more', title:'操作', width: 120, minWidth: 140, toolbar: '#more-table-toolbar'}
+        ,{field:'expire', title:'Ablaufdatum', sort: true,width:200,edit: 'text',templet: '#TPL-expire'}
+        ,{field:'node', title:'Knotenlimit', width: 100,edit: 'text'}
+        ,{field: 'route', title:'Route', width: 100, minWidth: 100, toolbar: '#route-table-toolbar'}
+        ,{field: 'enable', title:'Aktiviert', width: 100, minWidth: 100, toolbar: '#enable-table-toolbar'}
+        ,{field: 'more', title:'Aktion', width: 120, minWidth: 140, toolbar: '#more-table-toolbar'}
 
       ]]
       ,error: function(res, msg){
@@ -155,11 +154,11 @@
 
 
 
-    //事件-单元格编辑
+    // Event: Zellenbearbeitung
     table.on('edit(test-table-index)', function(obj){
-      var value = obj.value //得到修改后的值
-      ,data = obj.data //得到所在行所有键值
-      ,field = obj.field; //得到字段
+      var value = obj.value // geänderter Wert
+      ,data = obj.data // Zeilendaten
+      ,field = obj.field; // Feldname
 
       console.log(field)
 
@@ -171,11 +170,10 @@
         dataType: 'json',
         data: {user_id: obj.data.id,new_expire: obj.value},
         success:function(res){
-            // console.log(res.code)
             if(res.code == 0){
               layer.msg(res.msg, {icon: 6});
-              var field = 'name' //得到字段
-              var value = obj.value //得到修改后的值
+              var field = 'name'
+              var value = obj.value
 
               var update = {};
               update[field] = value;
@@ -192,11 +190,10 @@
         dataType: 'json',
         data: {user_id: obj.data.id,new_node: obj.value},
         success:function(res){
-            // console.log(res.code)
             if(res.code == 0){
               layer.msg(res.msg, {icon: 6});
-              var field = 'name' //得到字段
-              var value = obj.value //得到修改后的值
+              var field = 'name'
+              var value = obj.value
 
               var update = {};
               update[field] = value;
@@ -210,7 +207,7 @@
       
     });
     
-    // 工具栏事件
+    // Toolbar-Events
     table.on('toolbar(test-table-index)', function(obj){
       var $ = layui.$;
       var util = layui.util;
@@ -227,16 +224,16 @@
 
         case 'multi-row':
           table.reload('test-table-index', {
-            // 设置行样式，此处以设置多行高度为例。若为单行，则没必要设置改参数 - 注：v2.7.0 新增
+            // Zeilenstil setzen; hier beispielhaft größere Höhe für Mehrzeilenanzeige
             lineStyle: 'height: 95px;' 
           });
-          layer.msg('已设为多行显示');
+          layer.msg('Mehrzeilige Anzeige aktiviert');
         break;
         case 'default-row':
           table.reload('test-table-index', {
-            lineStyle: null // 恢复单行
+            lineStyle: null // Einzeilig wiederherstellen
           });
-          layer.msg('已设为单行显示');
+          layer.msg('Einzeilige Anzeige aktiviert');
         break;
         case 'LAYTABLE_TIPS':
           layer.alert('Table for layui-v'+ layui.v);
@@ -247,15 +244,13 @@
 
 
    
-    //触发单元格工具事件
-    table.on('tool(test-table-index)', function(obj){ // 双击 toolDouble
+    // Event: Zellen-Tools
+    table.on('tool(test-table-index)', function(obj){
       var $ = layui.$;
       var data = obj.data;
-      // console.log(obj)
-
 
       if(obj.event === 'del'){
-        layer.confirm('真的删除行么', function(index){
+        layer.confirm('Möchten Sie diese Zeile wirklich löschen?', function(index){
           $.ajax({
             url:'/api/user/delUser',
             type: 'post',
@@ -263,9 +258,9 @@
             data: {user_id: obj.data.id},
             success:function(res){
               if (res.code == 2){
-                layer.msg("该用户存在节点未删除", {icon: 7});
+                layer.msg("Dieser Benutzer hat noch Knoten, die nicht gelöscht wurden", {icon: 7});
               }else{
-                layer.msg('删除成功', {icon: 6});
+                layer.msg('Erfolgreich gelöscht', {icon: 6});
                 obj.del();
                 layer.close(index);
               }
@@ -277,24 +272,23 @@
       }else if(obj.event === 'detail'){
         console.log(data)
         layer.open({
-          title: '用户信息',
+          title: 'Benutzerinformationen',
           type: 1,
           area: ['600px','400px'],
           content: '<div style="padding: 20px;">'+
-              '手机号码：'+ data.cellphone+ '<br>'+
-              '邮箱地址：'+ data.email+ '<br>'+
-              '注册时间：'+ data.createTime+
+              'Mobilnummer: '+ data.cellphone+ '<br>'+
+              'E-Mail-Adresse: '+ data.email+ '<br>'+
+              'Registrierungszeit: '+ data.createTime+
             '</div>'
         });
       }
     });
 
 
-    //事件-路由启用操作
+    // Event: Route erlauben
     form.on('checkbox(route-table-toolbar)', function(obj){
     var json = JSON.parse(decodeURIComponent($(this).data('json')));
       json = table.clearCacheKey(json);
-      // console.log("执行用户状态操作");
       $.ajax({
         url:'/api/user/route_enable',
         type: 'post',
@@ -311,16 +305,15 @@
       });
     });
    
-    //事件-开关操作
+    // Event: Aktivierungs-Schalter
     form.on('switch(enable-table-toolbar)', function(obj){
       var $ = layui.$;
       var json = JSON.parse(decodeURIComponent($(this).data('json')));
-      //layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
       
       json = table.clearCacheKey(json);
       console.log(obj.elem.checked); 
 
-      console.log("执行用户状态操作");
+      console.log("Benutzerstatus ändern");
       $.ajax({
         url:'/api/user/user_enable',
         type: 'post',
@@ -345,5 +338,4 @@
 
 </body>
 </html>
-
 {% endraw %}
