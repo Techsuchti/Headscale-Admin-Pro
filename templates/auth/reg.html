@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>用户注册中心</title>
-  <!-- 请勿在项目正式环境中引用该 layui.css 地址 -->
+  <title>Registrierungszentrum</title>
+  <!-- Bitte diese layui.css-Adresse nicht in der Produktionsumgebung des Projekts einbinden -->
     {#  <link href="//unpkg.com/layui@2.9.18/dist/css/layui.css" rel="stylesheet">#}
   <link href="static/layui/css/layui.css" rel="stylesheet">
   <link href="static/adminui/dist/css/admin.css" rel="stylesheet">
@@ -19,7 +19,7 @@ h2{margin-top:35px;margin-bottom:50px;text-align:center;font-weight:300;font-siz
 #captchaImage{width:120px;height:36px}
 </style>
 <div class="layadmin-user-login-box layadmin-user-login-header">
-<h2>账户注册</h2>
+<h2>Konto registrieren</h2>
 </div>
 <form class="layui-form">
   <div class="demo-reg-container">
@@ -30,7 +30,7 @@ h2{margin-top:35px;margin-bottom:50px;text-align:center;font-weight:300;font-siz
         <div class="layui-input-prefix">
           <i class="layui-icon layui-icon-username"></i>
         </div>
-        <input type="text" name="username" value="" lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input" lay-affix="clear">
+        <input type="text" name="username" value="" lay-verify="required" placeholder="Benutzername" autocomplete="off" class="layui-input" lay-affix="clear">
       </div>
     </div>
 
@@ -41,7 +41,7 @@ h2{margin-top:35px;margin-bottom:50px;text-align:center;font-weight:300;font-siz
             <div class="layui-input-prefix">
               <i class="layui-icon layui-icon-cellphone"></i>
             </div>
-            <input type="text" name="phone" value="" lay-verify="required" placeholder="手机号" lay-reqtext="请填写手机号" autocomplete="off" class="layui-input" id="reg-cellphone">
+            <input type="text" name="phone" value="" lay-verify="required" placeholder="Handynummer" lay-reqtext="Bitte Handynummer eingeben" autocomplete="off" class="layui-input" id="reg-cellphone">
           </div>
       </div>
     </div>
@@ -52,7 +52,7 @@ h2{margin-top:35px;margin-bottom:50px;text-align:center;font-weight:300;font-siz
             <div class="layui-input-prefix">
               <i class="layui-icon layui-icon-email"></i>
             </div>
-            <input type="text" name="email" value="" lay-verify="required" placeholder="邮箱" lay-reqtext="请填写邮箱地址" autocomplete="off" class="layui-input" id="reg-email">
+            <input type="text" name="email" value="" lay-verify="required" placeholder="E-Mail" lay-reqtext="Bitte E-Mail-Adresse eingeben" autocomplete="off" class="layui-input" id="reg-email">
           </div>
       </div>
     </div>
@@ -64,7 +64,7 @@ h2{margin-top:35px;margin-bottom:50px;text-align:center;font-weight:300;font-siz
         <div class="layui-input-prefix">
           <i class="layui-icon layui-icon-password"></i>
         </div>
-        <input type="password" name="password" value="" lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input" id="reg-password" lay-affix="eye">
+        <input type="password" name="password" value="" lay-verify="required" placeholder="Passwort" autocomplete="off" class="layui-input" id="reg-password" lay-affix="eye">
       </div>
     </div>
     <div class="layui-form-item">
@@ -72,7 +72,7 @@ h2{margin-top:35px;margin-bottom:50px;text-align:center;font-weight:300;font-siz
         <div class="layui-input-prefix">
           <i class="layui-icon layui-icon-password"></i>
         </div>
-        <input type="password" name="confirmPassword" value="" lay-verify="required|confirmPassword" placeholder="确认密码" autocomplete="off" class="layui-input" lay-affix="eye">
+        <input type="password" name="confirmPassword" value="" lay-verify="required|confirmPassword" placeholder="Passwort bestätigen" autocomplete="off" class="layui-input" lay-affix="eye">
       </div>
     </div>
 
@@ -82,7 +82,7 @@ h2{margin-top:35px;margin-bottom:50px;text-align:center;font-weight:300;font-siz
             <div class="layui-input-prefix">
               <i class="layui-icon layui-icon-vercode"></i>
             </div>
-            <input type="text" name="vercode" value="" lay-verify="required" placeholder="验证码" lay-reqtext="请填写验证码" autocomplete="off" class="layui-input">
+            <input type="text" name="vercode" value="" lay-verify="required" placeholder="Captcha" lay-reqtext="Bitte Captcha eingeben" autocomplete="off" class="layui-input">
           </div>
       </div>
       <div class="layui-col-xs5">
@@ -93,20 +93,20 @@ h2{margin-top:35px;margin-bottom:50px;text-align:center;font-weight:300;font-siz
     </div>
 
     <div class="layui-form-item">
-      <input type="checkbox" name="agreement" lay-verify="required" lay-skin="primary" title="同意">
+      <input type="checkbox" name="agreement" lay-verify="required" lay-skin="primary" title="Zustimmen">
       <a href="#terms" target="_blank" style="position: relative; top: 6px; left: -15px;">
-        <ins>用户协议</ins>
+        <ins>Nutzungsbedingungen</ins>
       </a>
     </div>
     <div class="layui-form-item">
-      <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-reg">注册</button>
+      <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-reg">Registrieren</button>
     </div>
-    <a href="login" class="layadmin-user-jump-change layadmin-link layui-hide-xs">用已有帐号登入</a>
-    <a href="login" class="layadmin-user-jump-change layadmin-link layui-hide-sm layui-show-xs-inline-block">登入</a>
+    <a href="login" class="layadmin-user-jump-change layadmin-link layui-hide-xs">Mit vorhandenem Konto anmelden</a>
+    <a href="login" class="layadmin-user-jump-change layadmin-link layui-hide-sm layui-show-xs-inline-block">Anmelden</a>
   </div>
 </form>
 
-<!-- 请勿在项目正式环境中引用该 layui.js 地址 -->
+<!-- Bitte diese layui.js-Adresse nicht in der Produktionsumgebung des Projekts einbinden -->
   <script src="static/layui/layui.js"></script>
 <script>
 
@@ -136,7 +136,7 @@ layui.use(function(){
   var captcha_uuid = get_captcha();
 
 
-  // 点击按钮更新验证码
+  // Captcha beim Klick aktualisieren
   $('#captchaImage').click(function(){
       captcha_uuid = get_captcha();
       console.log(captcha_uuid)
@@ -145,25 +145,25 @@ layui.use(function(){
 
   console.log(captcha_uuid)
 
-  // 自定义验证规则
+  // Benutzerdefinierte Validierungsregeln
   form.verify({
-    // 确认密码
+    // Passwort bestätigen
     confirmPassword: function(value, item){
       var passwordValue = $('#reg-password').val();
       if(value !== passwordValue){
-        return '两次密码输入不一致';
+        return 'Die beiden Passwörter stimmen nicht überein';
       }
     }
   });
 
-  // 提交事件
+  // Submit-Event
   form.on('submit(demo-reg)', function(data){
-    var field = data.field; // 获取表单字段值
+    var field = data.field; // Formularfeldwerte abrufen
     field['captcha_uuid'] = captcha_uuid;
     console.log(field)
-    // 是否勾选同意
+    // Zustimmung geprüft?
     if(!field.agreement){
-      layer.msg('您必须勾选同意用户协议才能注册');
+      layer.msg('Sie müssen den Nutzungsbedingungen zustimmen, um sich registrieren zu können');
       return false;
     }
 
@@ -178,7 +178,6 @@ layui.use(function(){
             layer.msg(res.msg, {icon: 6});
             setTimeout(function() {
                 location.href="login?username="+field.username
-                {#alert('success')#}
             }, 1000);
           }else{
             layer.msg(res.msg, {icon: 7});
@@ -188,13 +187,12 @@ layui.use(function(){
         }
     });
 
-    return false; // 阻止默认 form 跳转
+    return false; // Standard-Form-Weiterleitung verhindern
   });
-
-
 
 });
 </script>
 
 </body>
+
 </html>
