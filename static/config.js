@@ -1,156 +1,156 @@
 /**
- * setter
+ * Setter / Konfiguration
  */
 
-// 初始化配置
+// Konfiguration initialisieren
 layui.define(['all'], function(exports){
   exports('setter', {
-    paths: { // v1.9.0 及以上版本的写法
-      core: layui.cache.base + 'adminui/dist/', // 核心库所在目录
-      views: layui.cache.base + 'views/', // 动态模板所在目录
-      modules: layui.cache.base + 'modules/', // 业务模块所在目录
-      base: layui.cache.base // 记录静态资源所在基础目录
+    paths: { // Schreibweise ab v1.9.0
+      core: layui.cache.base + 'adminui/dist/', // Verzeichnis der Kernbibliothek
+      views: layui.cache.base + 'views/', // Verzeichnis der dynamischen Templates
+      modules: layui.cache.base + 'modules/', // Verzeichnis der Business-Module
+      base: layui.cache.base // Basisverzeichnis für statische Ressourcen merken
     },
-    /* v1.9.0 之前的写法
-    // views: layui.cache.base + 'views/', // 业务视图所在目录
-    // base: layui.cache.base, // 记录静态资源所在基础目录
+    /* Schreibweise vor v1.9.0
+    // views: layui.cache.base + 'views/', // Verzeichnis der Business-Views
+    // base: layui.cache.base, // Basisverzeichnis für statische Ressourcen merken
     */
 
-    container: 'LAY_app', // 容器 ID
-    entry: 'index', // 默认视图文件名
-    engine: '.html', // 视图文件后缀名
-    pageTabs: true, // 是否开启页面选项卡功能。 iframe 版推荐开启
-    refreshCurrPage: true, // 当跳转页面 url 与当前页 url 相同时，是否自动执行刷新 --- 2.0+
+    container: 'LAY_app', // Container-ID
+    entry: 'index', // Standard-View-Dateiname
+    engine: '.html', // Dateiendung der View-Dateien
+    pageTabs: true, // Seiten-Tabs aktivieren? (iframe-Version empfohlen)
+    refreshCurrPage: true, // Wenn Ziel-URL = aktuelle URL: automatisch neu laden --- 2.0+
 
-    name: 'layuiAdmin', // 系统名称
-    tableName: 'layuiAdmin', // 本地存储表名
-    MOD_NAME: 'admin', // 模块事件名
+    name: 'layuiAdmin', // Systemname
+    tableName: 'layuiAdmin', // Tabellenname für lokalen Speicher
+    MOD_NAME: 'admin', // Name für Modul-Events
 
-    // 记录
+    // Verlauf/Record
     record: {
-      url: false // 是否开启 iframe 跳转时 url 记忆功能
+      url: false // URL-Merkerfunktion bei iframe-Navigation aktivieren?
     },
 
-    debug: true, // 是否开启调试模式。如开启，接口异常时会抛出异常 URL 等信息
+    debug: true, // Debug-Modus aktivieren? (Bei Fehlern werden z. B. Exception-URL-Infos ausgegeben)
 
-    // 自定义请求字段
+    // Benutzerdefinierte Request-Felder
     request: {
-      tokenName: false // 自动携带 token 的字段名（如：access_token）。可设置 false 不携带。
+      tokenName: false // Feldname für automatisch mitgesendetes Token (z. B. access_token); false = kein Token mitsenden
     },
 
-    // 自定义响应字段
+    // Benutzerdefinierte Response-Felder
     response: {
-      statusName: 'code', // 数据状态的字段名称
+      statusName: 'code', // Feldname des Statuscodes
       statusCode: {
-        ok: 0, // 数据状态一切正常的状态码
-        logout: 1001 // 登录状态失效的状态码
+        ok: 0, // Statuscode für „alles ok“
+        logout: 1001 // Statuscode für „Login ungültig/abgelaufen“
       },
-      msgName: 'msg', // 状态信息的字段名称
-      dataName: 'data' // 数据详情的字段名称
+      msgName: 'msg', // Feldname der Statusmeldung
+      dataName: 'data' // Feldname der Nutzdaten
     },
 
-    // 配置业务模块目录中的特殊模块
+    // Spezielle Module im Business-Modul-Verzeichnis konfigurieren
     extend: {
       layim: 'layim/layim' // layim
     },
 
-    // 主题配置
+    // Theme-Konfiguration
     theme: {
-      // 内置主题配色方案
+      // Integrierte Farbschemata
       color: [{
-        main: '#20222A', // 主题色
-        selected: '#16baaa', // 选中色
-        alias: 'default' // 默认别名
+        main: '#20222A', // Hauptfarbe
+        selected: '#16baaa', // Auswahlfarbe
+        alias: 'default' // Standard-Alias
       },{
         main: '#03152A',
         selected: '#3B91FF',
-        alias: 'dark-blue' // 藏蓝
+        alias: 'dark-blue' // Dunkelblau
       },{
         main: '#2E241B',
         selected: '#A48566',
-        alias: 'coffee' // 咖啡
+        alias: 'coffee' // Kaffee
       },{
         main: '#50314F',
         selected: '#7A4D7B',
-        alias: 'purple-red' // 紫红
+        alias: 'purple-red' // Purpurrot
       },{
         main: '#344058',
         logo: '#1E9FFF',
         selected: '#1E9FFF',
-        alias: 'ocean' // 海洋
+        alias: 'ocean' // Ozean
       },{
         main: '#3A3D49',
         logo: '#2F9688',
         selected: '#16b777',
-        alias: 'green' // 墨绿
+        alias: 'green' // Dunkelgrün
       },{
         main: '#20222A',
         logo: '#F78400',
         selected: '#F78400',
-        alias: 'red' // 橙色
+        alias: 'red' // Orange
       },{
         main: '#28333E',
         logo: '#AA3130',
         selected: '#AA3130',
-        alias: 'fashion-red' // 时尚红
+        alias: 'fashion-red' // Mode-Rot
       },{
         main: '#24262F',
         logo: '#3A3D49',
         selected: '#16baaa',
-        alias: 'classic-black' // 经典黑
+        alias: 'classic-black' // Klassisch Schwarz
       },{
         logo: '#226A62',
         header: '#2F9688',
-        alias: 'green-header' // 墨绿头
+        alias: 'green-header' // Dunkelgrüner Header
       },{
         main: '#344058',
         logo: '#0085E8',
         selected: '#1E9FFF',
         header: '#1E9FFF',
-        alias: 'ocean-header' // 海洋头
+        alias: 'ocean-header' // Ozean-Header
       },{
         header: '#393D49',
-        alias: 'classic-black-header' // 经典黑头
+        alias: 'classic-black-header' // Klassisch Schwarzer Header
       },{
         main: '#50314F',
         logo: '#50314F',
         selected: '#7A4D7B',
         header: '#50314F',
-        alias: 'purple-red-header' // 紫红头
+        alias: 'purple-red-header' // Purpurrot-Header
       },{
         main: '#28333E',
         logo: '#28333E',
         selected: '#AA3130',
         header: '#AA3130',
-        alias: 'fashion-red-header' // 时尚红头
+        alias: 'fashion-red-header' // Mode-Rot-Header
       },{
         main: '#28333E',
         logo: '#16baaa',
         selected: '#16baaa',
         header: '#16baaa',
-        alias: 'green-header' // 墨绿头
+        alias: 'green-header' // Dunkelgrüner Header
       },{
         main: '#393D49',
         logo: '#393D49',
         selected: '#16baaa',
         header: '#23262E',
-        alias: 'Classic-style1' // 经典风格1
+        alias: 'Classic-style1' // Klassischer Stil 1
       },{
         main: '#001529',
         logo: '#001529',
         selected: '#1890FF',
         header: '#1890FF',
-        alias: 'Classic-style2' // 经典风格2
+        alias: 'Classic-style2' // Klassischer Stil 2
       },{
         main: '#25282A',
         logo: '#25282A',
         selected: '#35BDB2',
         header: '#35BDB2',
-        alias: 'Classic-style3' // 经典风格3
+        alias: 'Classic-style3' // Klassischer Stil 3
       }],
 
-      // 初始的颜色索引，对应上面的配色方案数组索引
-      // 如果本地已经有主题色记录，则以本地记录为优先，除非请求本地数据（localStorage）
+      // Initialer Farbindex (entspricht dem Index im obigen Farbschema-Array)
+      // Wenn lokal bereits ein Theme gespeichert ist, hat dieses Priorität (außer beim Laden lokaler Daten)
       initColorIndex: 0
     }
   });
