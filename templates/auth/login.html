@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>异地组网登录页面</title>
-  <!-- 请勿在项目正式环境中引用该 layui.css 地址 -->
+  <title>Login-Seite für standortübergreifendes Netzwerk</title>
+  <!-- Bitte diese layui.css-Adresse nicht in der Produktionsumgebung des Projekts einbinden -->
 {#  <link href="/res/layui/css/layui.css" rel="stylesheet">#}
   <link href="static/layui/css/layui.css" rel="stylesheet">
   <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
@@ -19,7 +19,7 @@ h2{margin-top:100px;margin-bottom:50px;text-align:center;font-weight:300;font-si
 #captchaImage{width:120px;height:36px}
 
 </style>
-<h2>异地组网</h2>
+<h2>Standortübergreifendes Netzwerk</h2>
 <form class="layui-form">
   <div class="demo-login-container">
     <div class="layui-form-item">
@@ -27,7 +27,7 @@ h2{margin-top:100px;margin-bottom:50px;text-align:center;font-weight:300;font-si
         <div class="layui-input-prefix">
           <i class="layui-icon layui-icon-username"></i>
         </div>
-        <input type="text" name="username" value="" lay-verify="required" placeholder="用户名" lay-reqtext="请填写用户名" autocomplete="off" class="layui-input" lay-affix="clear">
+        <input type="text" name="username" value="" lay-verify="required" placeholder="Benutzername" lay-reqtext="Bitte Benutzernamen eingeben" autocomplete="off" class="layui-input" lay-affix="clear">
       </div>
     </div>
     <div class="layui-form-item">
@@ -35,7 +35,7 @@ h2{margin-top:100px;margin-bottom:50px;text-align:center;font-weight:300;font-si
         <div class="layui-input-prefix">
           <i class="layui-icon layui-icon-password"></i>
         </div>
-        <input type="password" name="password" value="" lay-verify="required" placeholder="密   码" lay-reqtext="请填写密码" autocomplete="off" class="layui-input" lay-affix="eye">
+        <input type="password" name="password" value="" lay-verify="required" placeholder="Passwort" lay-reqtext="Bitte Passwort eingeben" autocomplete="off" class="layui-input" lay-affix="eye">
       </div>
     </div>
     <div class="layui-form-item">
@@ -45,7 +45,7 @@ h2{margin-top:100px;margin-bottom:50px;text-align:center;font-weight:300;font-si
             <div class="layui-input-prefix">
               <i class="layui-icon layui-icon-vercode"></i>
             </div>
-            <input type="text" name="vercode" value="" lay-verify="required" placeholder="验证码" lay-reqtext="请填写验证码" autocomplete="off" class="layui-input" lay-affix="clear">
+            <input type="text" name="vercode" value="" lay-verify="required" placeholder="Captcha" lay-reqtext="Bitte Captcha eingeben" autocomplete="off" class="layui-input" lay-affix="clear">
           </div>
         </div>
         <div class="layui-col-xs5">
@@ -56,11 +56,11 @@ h2{margin-top:100px;margin-bottom:50px;text-align:center;font-weight:300;font-si
       </div>
     </div>
     <div class="layui-form-item">
-    <a href="#reg"  id="reg" style="float: left; margin-top: 7px;">注册账号</a>
-      <a href="#forget" id="forget" style="float: right; margin-top: 7px;">忘记密码？</a>
+    <a href="#reg"  id="reg" style="float: left; margin-top: 7px;">Konto registrieren</a>
+      <a href="#forget" id="forget" style="float: right; margin-top: 7px;">Passwort vergessen?</a>
     </div>
     <div class="layui-form-item">
-      <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-login">登录</button>
+      <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-login">Anmelden</button>
     </div>
 
   </div>
@@ -69,7 +69,7 @@ h2{margin-top:100px;margin-bottom:50px;text-align:center;font-weight:300;font-si
 
 
 
-<!-- 请勿在项目正式环境中引用该 layui.js 地址 -->
+<!-- Bitte diese layui.js-Adresse nicht in der Produktionsumgebung des Projekts einbinden -->
 <script src="/static/layui/layui.js"></script>
 
 
@@ -91,7 +91,7 @@ layui.use(function(){
   var layer = layui.layer;
   var $ = layui.$;
 
-    // 点击按钮更新验证码
+    // Captcha beim Klick aktualisieren
   $('#captchaImage').click(function(){
       captcha_uuid = generateUUID();
       document.getElementById('captchaImage').src = '/get_captcha?captcha_uuid=' + captcha_uuid;
@@ -101,14 +101,14 @@ layui.use(function(){
   document.getElementById('captchaImage').src = '/get_captcha?captcha_uuid=' + captcha_uuid;
 
 
-  //取到get参数
+  // GET-Parameter auslesen
   const search = new URLSearchParams(location.search)
   $('input[name="username"]').val(search.get('username'));
 
 
-  // 提交事件
+  // Submit-Event
   form.on('submit(demo-login)', function(data){
-    var field = data.field; // 获取表单字段值
+    var field = data.field; // Formularfeldwerte abrufen
     field['captcha_uuid'] = captcha_uuid;
     console.log(field);
 
@@ -119,7 +119,7 @@ layui.use(function(){
       dataType: 'json',
       success:function(res){
         if(res.code == 0){
-          layer.msg('登录成功', {icon: 6});
+          layer.msg('Login erfolgreich', {icon: 6});
           setInterval(function() {
               location.href="admin"
           }, 1000);
@@ -134,12 +134,12 @@ layui.use(function(){
     
 
     
-    return false; // 阻止默认 form 跳转
+    return false; // Standard-Form-Weiterleitung verhindern
   });
 
 
   $("#forget").click(function(){
-    layer.msg("暂未开放", {icon: 7});
+    layer.msg("Derzeit nicht verfügbar", {icon: 7});
   });
 
   $("#reg").click(function(){
